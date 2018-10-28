@@ -297,14 +297,32 @@ section.icons .content a {
   -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
 }
+section.header .content a .icon {
+  margin-left: 1px;
+  margin-right: 5px;
+  margin-top: -.9px;
+  opacity: 0.7;
+  -webkit-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -moz-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -ms-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  -o-transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+  transition: opacity 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
+}
 section.icons .content a:first-child {
   margin-left: 0;
 }
 section.icons .content a:last-child {
   margin-right: 0;
 }
+section.header .content a:hover .icon {
+  opacity: .9;
+}
 section.icons .content a:hover {
   opacity: 0.8;
+}
+section.header .content a .icon {
+  width: 20px;
+  height: 20px;
 }
 section.icons .content a .icon {
   width: 16px;
