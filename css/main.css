@@ -131,6 +131,9 @@ section.main {
     -ms-order: 0;
     order: 0;
   }
+  section.header .home .content {
+    margin-top: -1.5cm;
+  }
   section.icons {
     -webkit-order: 2;
     -moz-order: 2;
@@ -156,9 +159,6 @@ section.header .container {
   -moz-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-}
-section.header .home .content {
-  margin-top: -1.5cm;
 }
 section.header .content {
   display: -webkit-flex;
