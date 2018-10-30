@@ -152,6 +152,12 @@ section.header {
 }
 section.header .container {
   position: fixed;
+  top: 15%;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  z-index: 1300;
 }
 section.header .home {
   -webkit-align-items: center;
