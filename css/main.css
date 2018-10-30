@@ -158,7 +158,6 @@ section.header .container {
   justify-content: center;
 }
 section.header .content {
-  margin-top: -1.5cm;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -172,6 +171,9 @@ section.header .content {
   -moz-align-items: center;
   -ms-align-items: center;
   align-items: center;
+}
+section.header .home .content {
+  margin-top: -1.5cm;
 }
 section.header .avatar.home {
   border-radius: 50%;
