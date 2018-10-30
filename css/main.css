@@ -151,6 +151,9 @@ section.header {
   background-color: #f7f7f7;
 }
 section.header .container {
+  position: fixed;
+}
+section.header .home {
   -webkit-align-items: center;
   -moz-align-items: center;
   -ms-align-items: center;
