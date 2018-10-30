@@ -158,6 +158,7 @@ section.header .container {
   justify-content: center;
 }
 section.header .content {
+  margin-top: -2cm;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
