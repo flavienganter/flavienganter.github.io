@@ -157,6 +157,10 @@ section.header .container {
   -moz-align-items: center;
   -ms-align-items: center;
   align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
   z-index: 1300;
 }
 section.header .home {
