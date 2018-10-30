@@ -240,6 +240,7 @@ section.header nav ul a {
 }
 section.header nav ul .active a {
   border-bottom: 1px dashed;
+  padding-bottom: 1px;
 }
 section.header nav ul a:hover, section.header nav ul a:active {
   color: #111;
