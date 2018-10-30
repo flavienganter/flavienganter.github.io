@@ -150,7 +150,7 @@ section.main {
 section.header {
   background-color: #f7f7f7;
 }
-section.header .container {
+/*section.header .container {
   position: fixed;
   top: 15%;
   -webkit-align-items: center;
@@ -158,8 +158,8 @@ section.header .container {
   -ms-align-items: center;
   align-items: center;
   z-index: 1300;
-}
-section.header .home {
+}*/
+section.header .container {
   -webkit-align-items: center;
   -moz-align-items: center;
   -ms-align-items: center;
