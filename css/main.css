@@ -239,7 +239,7 @@ section.header nav ul a {
   transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
 }
 section.header nav ul .active a {
-  border-bottom: 2px dashed;
+  border-bottom: 1px dashed;
 }
 section.header nav ul a:hover, section.header nav ul a:active {
   color: #111;
