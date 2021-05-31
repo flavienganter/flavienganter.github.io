@@ -631,6 +631,10 @@ section.main .content .markdown h3 {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
+section.main .content .markdown h3.title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
 section.main .content .markdown h4,
 section.main .content .markdown h5,
 section.main .content .markdown h6 {
