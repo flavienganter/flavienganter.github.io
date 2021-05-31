@@ -684,7 +684,7 @@ section.main .content .markdown p {
 }
 section.main .content .markdown p.sub {
   /* Invoked by line break */
-  font-size: .8rem;
+  font-size: .9rem;
   margin-top: -.5em;
   margin-bottom: 1em;
 }
