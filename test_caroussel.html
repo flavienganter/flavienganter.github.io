@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau Adaptatif avec Swipe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+        }
+        table {
+            min-width: 600px; /* Taille minimale du tableau */
+            width: 100%;
+            border-collapse: collapse;
+            transition: transform 0.3s ease;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .swipe-instruction {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 10px;
+            display: none; /* Caché par défaut */
+        }
+        @media (max-width: 600px) {
+            .swipe-instruction {
+                display: block; /* Affiché sur les petits écrans */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Comparaison de Profils</h1>
+    <div class="swipe-instruction">Swipez pour voir l'autre profil</div>
+    <div class="table-container">
+        <table id="swipeTable">
+            <tr>
+                <th>Attribut</th>
+                <th>Profil A</th>
+                <th>Profil B</th>
+            </tr>
+            <tr>
+                <td>Âge</td>
+                <td>25 ans</td>
+                <td>30 ans</td>
+            </tr>
+            <tr>
+                <td>Profession</td>
+                <td>Ingénieur</td>
+                <td>Professeur</td>
+            </tr>
+            <tr>
+                <td>Niveau d'études</td>
+                <td>Master</td>
+                <td>Doctorat</td>
+            </tr>
+            <tr>
+                <td>Expérience</td>
+                <td>3 ans</td>
+                <td>7 ans</td>
+            </tr>
+            <tr>
+                <td>Compétences</td>
+                <td>Programmation, Analyse de données</td>
+                <td>Recherche, Enseignement</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        const tableContainer = document.querySelector('.table-container');
+        const table = document.getElementById('swipeTable');
+        let isSwipingLeft = false;
+        let accumulatedDelta = 0;
+        const threshold = 50;
+
+        let isMouseDown = false;
+        let startX;
+
+        function handleSwipe(deltaX) {
+            if (table.offsetWidth <= tableContainer.offsetWidth) {
+                return;
+            }
+
+            accumulatedDelta += deltaX;
+            
+            if (Math.abs(accumulatedDelta) > threshold) {
+                const maxScroll = table.offsetWidth - tableContainer.offsetWidth;
+                let newScrollLeft = tableContainer.scrollLeft + accumulatedDelta;
+                
+                newScrollLeft = Math.max(0, Math.min(newScrollLeft, maxScroll));
+                
+                tableContainer.scrollLeft = newScrollLeft;
+                accumulatedDelta = 0;
+            }
+        }
+
+        tableContainer.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                e.preventDefault();
+                handleSwipe(e.deltaX);
+            }
+        }, { passive: false });
+
+        let touchStartX;
+
+        tableContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+        });
+
+        tableContainer.addEventListener('touchmove', (e) => {
+            if (touchStartX) {
+                const touchEndX = e.touches[0].clientX;
+                const deltaX = touchStartX - touchEndX;
+                handleSwipe(deltaX);
+                touchStartX = touchEndX;
+            }
+        });
+
+        tableContainer.addEventListener('touchend', () => {
+            touchStartX = null;
+        });
+
+        tableContainer.addEventListener('mousedown', (e) => {
+            isMouseDown = true;
+            startX = e.clientX;
+            tableContainer.style.cursor = 'grabbing';
+        });
+
+        tableContainer.addEventListener('mousemove', (e) => {
+            if (isMouseDown) {
+                const deltaX = startX - e.clientX;
+                handleSwipe(deltaX);
+                startX = e.clientX;
+            }
+        });
+
+        tableContainer.addEventListener('mouseup', () => {
+            isMouseDown = false;
+            tableContainer.style.cursor = 'grab';
+        });
+
+        tableContainer.addEventListener('mouseleave', () => {
+            isMouseDown = false;
+            tableContainer.style.cursor = 'grab';
+        });
+
+        function updateSwipeInstruction() {
+            const swipeInstruction = document.querySelector('.swipe-instruction');
+            if (table.offsetWidth > tableContainer.offsetWidth) {
+                swipeInstruction.style.display = 'block';
+            } else {
+                swipeInstruction.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('load', updateSwipeInstruction);
+        window.addEventListener('resize', updateSwipeInstruction);
+    </script>
+</body>
+</html>
