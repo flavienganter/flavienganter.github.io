@@ -32,7 +32,7 @@ a:active {
 }
 html {
   height: 100%;
-  font-size: 16px;
+  font-size: 18px;
 }
 body {
   display: -webkit-flex;
@@ -54,9 +54,8 @@ body {
   justify-content: flex-start;
   width: 100%;
   min-height: 100%;
+  font-family: "Cormorant", serif;
   font-weight: 400;
-  /*font-family: 'Open Sans', 'Helvetica Neue', 'Arial', sans-serif;*/
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
   color: #111;
   line-height: 1.6;
   text-rendering: optimizeLegibility !important;
@@ -114,6 +113,10 @@ section.header {
   order: 0;
 }
 section.icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   -webkit-order: 1;
   -moz-order: 1;
   -ms-order: 1;
@@ -131,6 +134,10 @@ section.main {
     -moz-order: 0;
     -ms-order: 0;
     order: 0;
+    position: relative;
+  }
+  .language-flag {
+    right: -60px;
   }
   section.header .home .content {
     margin-top: -1.5cm;
@@ -202,19 +209,62 @@ section.header .avatar {
   float: left;
 }
 section.header .name {
-  font-size: 18px;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-size: 1.3em;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
-  letter-spacing: -0.005rem;
-  font-weight: 700;
+  /*font-weight: 700;*/
+  letter-spacing: 0.05rem;
   color: #333;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   color: #555;
   margin-top: 50px;
 }
+section.header nav ul a:hover, section.header .name:hover {
+  color: #b51a1a;
+}
+section.header .name {
+  font-family: "amandine", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.8em;
+  position: relative;
+  display: inline-block;
+}
+section.header .name:after {
+  content: "❡";
+  position: absolute;
+  color: #d5d4d4;
+  right: -1.2em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: .6em;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+p.psymbol {
+  margin-top: 50px;
+}
+
+p.psymbol a {
+  font-size: 2em;
+  color: #555;
+}
+
+p.psymbol a:hover {
+  color: #b51a1a;
+  border: none;
+}
+
+section.header .name:hover::after {
+  opacity: 1;
+}
+
 section.header h3.self-intro {
   font-size: 1em;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
   letter-spacing: -0.005rem;
   font-weight: 700;
@@ -224,11 +274,13 @@ section.header h3.self-intro {
   margin-bottom: 1rem;
 }
 section.header nav {
-  font-size: 14px;
+  font-size: 2em;
+  letter-spacing: 0.01rem;
   float: right;
   margin-bottom: 16px;
   text-transform: uppercase;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
 }
 section.header nav ul {
@@ -259,10 +311,6 @@ section.header nav ul a {
   -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
 }
-
-section.header nav ul a:hover, section.header nav ul a:active {
-  color: #111;
-}
 @media (min-width: 600px) {
   section.header {
     background-color: transparent;
@@ -283,7 +331,7 @@ section.header nav ul a:hover, section.header nav ul a:active {
     color: #333;
   }
   section.header nav {
-    font-size: 14px;
+    font-size: 0.8em;
     margin-bottom: 0;
   }
   section.header nav ul {
@@ -292,12 +340,10 @@ section.header nav ul a:hover, section.header nav ul a:active {
   section.header nav ul a {
     color: #666;
   }
-  section.header nav ul a:hover {
-    color: #333;
-  }
 }
 section.icons {
   background-color: #f7f7f7;
+  float: left;
 }
 section.icons .container {
   -webkit-align-items: center;
@@ -310,7 +356,7 @@ section.icons .container {
   justify-content: center;
 }
 section.icons .content {
-  width: auto;
+  width: 50%;
 }
 section.icons .content a {
   margin-left: 6px;
@@ -383,7 +429,7 @@ section.main .container {
 }
 section.main .content {
   color: #111;
-  font-size: 16px;
+  font-size: 1em;
 }
 section.main .content .title-container {
   display: -webkit-flex;
@@ -398,8 +444,9 @@ section.main .content .title-container {
 }
 section.main .content .title-container .initials {
   display: none;
-  font-size: 18px;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-size: 1em;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
   letter-spacing: -0.005rem;
   font-weight: 700;
@@ -419,8 +466,9 @@ section.main .content .title-container .initials a:hover {
   color: #333;
 }
 section.main .content .page-heading {
-  font-size: 18px;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-size: 1em;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
   letter-spacing: -0.005rem;
   font-weight: 700;
@@ -488,7 +536,8 @@ section.main .container.f04 .content {
 section.main .container.f04 .content .num {
   margin: 30px 0px 30px 0;
   font-weight: 200;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
   font-size: 50px;
 }
@@ -544,7 +593,8 @@ section.main .container .content .no-bullet {
 }
 section.main .container .content .no-bullet .date {
   font-size: 18px;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-family: "Cormorant", serif;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
   letter-spacing: -0.005rem;
   font-weight: 700;
@@ -596,16 +646,21 @@ section.main {
   }
 }
 a {
-  color: #b62324;
+  color: #000;
   -webkit-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   -moz-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   -ms-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   -o-transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
   transition: color 0.1s cubic-bezier(0.47, 0, 0.75, 0.72);
 }
-a:hover {
-  color: #de2026;
+.main a, nav a {
+  color: #666;
 }
+.main a:hover, nav a:hover {
+  color: #b62324;
+  border-bottom: 1px dashed;
+}
+
 img {
   max-width: 100%;
 }
@@ -628,13 +683,14 @@ section.main .content .markdown h4,
 section.main .content .markdown h5,
 section.main .content .markdown h6 {
   font-size: 18px;
-  font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;
+  font-family: "amandine", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  /*font-family: 'Old Standard TT', 'Cardo', 'Georgia', 'Times New Roman', serif;*/
   /*font-family: 'Raleway', 'Helvetica Neue', 'Arial', sans-serif;*/
-  letter-spacing: -0.005rem;
-  font-weight: 700;
   color: #333;
   text-transform: none;
-  margin-top: 1.75rem;
+  margin-top: 3rem;
 }
 section.main .content .markdown h1 {
   font-size: 1.75rem;
@@ -652,6 +708,7 @@ section.main .content .markdown h3 {
 section.main .content .markdown h3.title {
   font-size: 1.2rem;
   margin-bottom: 1rem;
+  margin-top: 2.5rem;
 }
 section.main .content .markdown h4,
 section.main .content .markdown h5,
@@ -787,4 +844,60 @@ section.main .content .markdown th {
 section.main .content .markdown tbody tr:nth-child(odd) td,
 section.main .content .markdown tbody tr:nth-child(odd) th {
   background-color: #f7f7f7;
+}
+
+.fr { display: none; }
+.en { display: block; }
+html[lang="fr"] .fr { display: block; }
+html[lang="fr"] .en { display: none; }
+
+.language-flag {
+  position: relative;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #333;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.language-flag a {
+  display: block;
+  padding: 4px 6px;
+  text-decoration: none;
+}
+
+.flag {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  margin: 0 5px;
+  opacity: .7;
+  transition: opacity 0.3s ease;
+}
+
+/* Le drapeau actif est en couleur */
+.language-flag:hover .flag {
+  width: 15px;
+  height: 15px;
+  opacity: 1;
+}
+
+.abstract-toggle .chevron {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  transform: rotate(270deg);
+  font-size: 0.5em;
+  position: relative;
+  top: -2px;
+  margin-left: 1px;
+}
+
+.abstract-toggle.active .chevron {
+  transform: rotate(90deg);
+}
+.smallbr {
+  font-size: .8em;
 }
