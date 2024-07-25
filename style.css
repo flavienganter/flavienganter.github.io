@@ -49,8 +49,8 @@ body {
   justify-content: flex-start;
   width: 100%;
   min-height: 100%;
-  font-family: "Cormorant", serif;
-  font-weight: 400;
+  font-family: cormorant, sans-serif;
+  font-weight: 300;
   color: #111;
   line-height: 1.6;
   text-rendering: optimizeLegibility !important;
@@ -99,7 +99,7 @@ section.header {
       float: left;
       margin-left: -120px;
       margin-right: 15px;
-      margin-top: -8px;
+      margin-top: 5px;
     }
 
   }
@@ -107,10 +107,11 @@ section.header {
   /* name */
 
   section.header .name {
-    font-family: "amandine", sans-serif;
-    font-weight: 500;
+    font-family: ambroise-std, serif;
+    font-weight: 700;
     font-style: normal;
-    font-size: 1.8em;
+    font-variant: all-small-caps;
+    font-size: 2.5em;
     position: relative;
     display: inline-block;
     letter-spacing: 0.05rem;
@@ -125,10 +126,10 @@ section.header {
     content: "❡";
     position: absolute;
     color: #d5d4d4;
-    right: -1.2em;
+    right: -.8em;
     opacity: 0;
     transition: opacity 0.3s ease;
-    font-size: .6em;
+    font-size: .7em;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -140,10 +141,11 @@ section.header {
   /* navigation */
 
   section.header nav {
-    font-size: .8em;
+    font-size: .7em;
     letter-spacing: 0.01rem;
     text-transform: uppercase;
-    margin-top: -15px;
+    margin-top: -20px;
+    font-family: montserrat, sans-serif;
   }
 
   section.header nav ul {
@@ -183,7 +185,7 @@ section.header {
 
   section.header nav ul a:hover {
     color: #b51a1a;
-    border-bottom: 1px dashed;
+    border-bottom: 1px solid rgba(181, 26, 26, 0.3); 
   }
 
   /* flags */
@@ -264,8 +266,9 @@ section.main .content h3,
 section.main .content h4,
 section.main .content h5,
 section.main .content h6 {
-  font-family: "amandine", sans-serif;
-  font-weight: 300;
+  font-family: montserrat, sans-serif;
+  font-variant: all-small-caps;
+  font-weight: 500;
   font-style: normal;
   color: #333;
   text-transform: none;
@@ -338,12 +341,12 @@ section.main .content strong {
 
 section.main .content a {
   color: #666;
-  border-bottom: 1px dashed #eee;
+  border-bottom: 1px dashed rgba(102, 102, 102, 0.2); 
 }
 
 section.main .content a:hover {
   color: #b62324;
-  border-bottom: 1px dashed;
+  border-bottom: 1px solid rgba(181, 26, 26, 0.3); 
 }
 
 section.main .content hr {
@@ -441,4 +444,11 @@ section.main .content .publi ul {
 section.main .content .publi ul li {
   font-size: .8em;
   list-style-type: "❧  ";
+}
+
+section.main .content span.article-info {
+  font-family: montserrat, sans-serif;
+  font-weight: 400;
+  font-variant: all-small-caps;
+  font-size: .7em;
 }
