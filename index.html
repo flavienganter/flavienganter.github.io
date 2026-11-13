@@ -1,108 +1,594 @@
 <!DOCTYPE html>
-<html lang="en-US">
-
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flavien Ganter</title>
+<!-- Unica One (name + labels) + Newsreader (text) — version 2026-11-13c (sans césures) -->
+<meta name="author" content="Flavien Ganter">
+<meta name="description" content="Flavien Ganter, sociologist and applied statistician. Max Weber Postdoctoral Fellow at the European University Institute, Florence.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flavien Ganter">
+<meta property="og:description" content="Sociologist and applied statistician. Ethnoracial and national boundaries, experiments, and statistical methodology.">
+<meta property="og:url" content="https://www.flavienganter.com/">
+<link rel="canonical" href="https://www.flavienganter.com/">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
+<!-- Google Fonts: EB Garamond (text + name), IBM Plex Mono (labels) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Unica+One&display=swap" rel="stylesheet">
 
-    <meta name="author" content="Flavien Ganter">
-    <meta name="title-en" content="Flavien Ganter" />
-    <meta name="title-fr" content="Flavien Ganter" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <title>Flavien Ganter</title>
+<script>
+  /* Set language before first paint (no flash). Saved choice > browser language > English. */
+  (function(){
+    var l = 'en';
+    try { l = localStorage.getItem('lang') || ((navigator.language||'').slice(0,2)==='fr' ? 'fr' : 'en'); } catch(e){}
+    document.documentElement.lang = l;
+  })();
+</script>
 
-    <link rel="canonical" href="https://www.flavienganter.com/">
+<style>
+  :root{
+    --paper:#FCFBF7;
+    --ink:#1A1A1A;
+    --ink-body:#262626;
+    --ink-soft:#6B6B6B;
+    --ink-faint:#9A9A9A;
+    --line:#DEDBD3;
+    --line-soft:#ECE9E2;
+    --accent:#B51A1A;
+    --accent-soft:rgba(181,26,26,.28);
 
-    <link rel="stylesheet" href="https://use.typekit.net/rvs6lvg.css">
+    --serif:"EB Garamond",Garamond,"Times New Roman",Georgia,serif;
+    --display:var(--serif);
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 
-    <link rel="stylesheet" href="style.css">
+    --maxw:760px;
+    --pad:clamp(1.25rem,5vw,2rem);
+  }
 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:4.5rem;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink-body);
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(1.08rem,.4vw + 1rem,1.18rem);
+    line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    font-variant-numeric:oldstyle-nums;
+  }
+  a{color:inherit;text-decoration:none;}
+  em,i{font-style:italic;}
+  ::selection{background:rgba(181,26,26,.12);}
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad);}
+  .mono{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;font-variant-numeric:normal;}
+  .sc{font-variant:all-small-caps;letter-spacing:.04em;hyphens:none;white-space:nowrap;}
+
+  /* bilingual */
+  html[lang="fr"] .en, html:not([lang="fr"]) .fr{display:none !important;}
+  q:lang(fr){quotes:"« " " »" "“" "”";}
+  q:lang(en){quotes:"“" "”" "‘" "’";}
+
+  /* prose links: dashed hairline, red on hover (kept from the current site) */
+  .prose a, .pub a, .contact a, .lnk{
+    border-bottom:1px dashed rgba(0,0,0,.25);
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .prose a:hover, .pub a:hover, .contact a:hover, .lnk:hover{color:var(--accent);border-bottom:1px solid var(--accent-soft);}
+
+  /* ---------- header ---------- */
+  :root{--bar:3.4rem;}
+  header.site{
+    position:sticky;top:0;z-index:20;height:var(--bar);
+    background:color-mix(in srgb,var(--paper) 90%,transparent);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid transparent;transition:border-color .3s ease;
+  }
+  /* bottom rule: absent at rest, drawn in from the left once the name has docked */
+  header.site::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--line-soft);
+    transform:scaleX(0);transform-origin:0 50%;opacity:0;
+    transition:transform .55s cubic-bezier(.3,.7,.2,1),opacity .3s;}
+  header.site.docked::after{transform:none;opacity:1;}
+  .navbar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:1rem;height:100%;}
+  /* name in the bar (monospace); faded in by the script as the big serif name arrives */
+  .brand{font-family:var(--mono);font-weight:500;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;line-height:1;
+    color:var(--ink);white-space:nowrap;opacity:0;pointer-events:none;transition:color .15s;}
+  .brand:hover{color:var(--accent);}
+  header.site.docked .brand{pointer-events:auto;}
+  nav.links{display:flex;align-items:center;gap:clamp(.9rem,2.6vw,1.8rem);line-height:1;}
+  nav.links a{line-height:1;}
+  nav.links a{color:var(--ink-soft);text-decoration:underline 1px transparent;text-underline-offset:5px;transition:color .15s,text-decoration-color .15s;}
+  nav.links a:hover{color:var(--accent);text-decoration-color:var(--accent-soft);}
+  /* language switch: small fixed tag in the bottom-right corner */
+  /* tucked against the bottom edge (no bottom border, as if it ran off the page),
+     just outside the right edge of the text column (or at the screen edge when there is no margin) */
+  .lang{position:fixed;z-index:25;bottom:0;
+    left:min(calc(50% + var(--maxw)/2 - var(--pad) + var(--bleed)/2 + 2.75rem), calc(100% - 5.6rem - env(safe-area-inset-right,0px)));
+    display:flex;align-items:center;gap:.4rem;line-height:1;white-space:nowrap;color:var(--ink-faint);
+    background:var(--paper);border:1px solid var(--line);border-bottom:0;
+    padding:.6rem .75rem calc(.7rem + env(safe-area-inset-bottom,0px));}
+  .lang button{all:unset;cursor:pointer;color:var(--ink-faint);font:inherit;letter-spacing:inherit;}
+  .lang button:hover{color:var(--accent);}
+  .lang button:focus-visible{outline:1px dotted var(--accent);outline-offset:2px;}
+  html:not([lang="fr"]) .lang [data-l="en"], html[lang="fr"] .lang [data-l="fr"]{color:var(--ink);}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(1.75rem,6vw,3.5rem);align-items:end;
+    padding-block:clamp(3rem,9vw,5.5rem) clamp(2.5rem,6vw,3.5rem);border-bottom:1px solid var(--line);}
+  .eyebrow{color:var(--ink-soft);margin:0 0 1.4rem;display:flex;align-items:center;gap:.9rem;}
+  .eyebrow::before,.sec-label::before{content:"";flex:none;width:3.2rem;height:1px;background:currentColor;opacity:.7;}
+  /* the big name; JS shrinks it and docks it into the top bar on scroll */
+  h1.name{
+    font-family:var(--display);font-weight:600;text-transform:uppercase;
+    font-size:clamp(1.75rem,5vw,2.6rem);line-height:1;letter-spacing:.09em;color:#2A2A2A;margin:0;
+    white-space:nowrap;position:relative;z-index:30;display:inline-block;
+    transform-origin:0 50%;will-change:transform;
+  }
+  h1.name a{display:inline-block;position:relative;transition:color .2s;}
+  h1.name a:hover{color:var(--accent);}
+  .role{font-style:italic;font-size:1.18em;color:var(--ink);margin:1rem 0 .2rem;line-height:1.35;}
+  .affil{color:var(--ink-soft);margin:0;line-height:1.4;}
+  .actions{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;margin-top:1.9rem;}
+  .actions a{color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:3px;transition:color .15s,border-color .15s;}
+  .actions a:hover{color:var(--accent);border-color:var(--accent);}
+
+  figure.portrait{margin:0;width:clamp(160px,22vw,210px);}
+  /* wide screens: the portrait grows and breaks out of the text column into the right margin.
+     --bleed = how far the composition extends past the column (50px photo + 8px frame). */
+  :root{--bleed:0px;}
+  @media (min-width:880px){
+    :root{--bleed:58px;}
+    figure.portrait{width:260px;margin-right:-50px;}
+    /* re-centre the whole composition (column + bleed) in the window */
+    header.site .navbar, main.wrap{position:relative;left:calc(var(--bleed) / -2);}
+    /* top links end where the portrait frame ends */
+    nav.links{margin-right:calc(-1 * var(--bleed));}
+    /* main separators (under the hero, between sections) run under the portrait too */
+    .hero, section.block{position:relative;border-bottom-color:transparent;}
+    .hero::after, section.block:not(:last-of-type)::after{content:"";position:absolute;left:0;right:calc(-1 * var(--bleed));
+      bottom:-1px;height:1px;background:var(--line);}
+  }
+  .portrait .frame{position:relative;}
+  .portrait .frame::before{content:"";position:absolute;inset:-8px;border:.5px solid #CFCBC2;z-index:0;}
+  .portrait img{position:relative;z-index:1;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;
+    background:#e9e6df;}
+
+  /* ---------- sections ---------- */
+  section.block{padding-block:clamp(2.75rem,7vw,4rem);border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:0;}
+  .sec-label{display:flex;align-items:center;gap:.9rem;color:var(--ink-soft);margin:0 0 1.75rem;}
+
+  .prose p{margin:0 0 1.05em;hyphens:manual;}
+  .prose p:last-child{margin-bottom:0;}
+  .prose .lead::first-letter{font-family:var(--display);float:left;font-size:3.35em;line-height:.82;padding:.08em .08em 0 0;color:var(--ink);}
+
+  .subhead{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin:2.6rem 0 .6rem;padding-bottom:.55rem;border-bottom:1px solid var(--line-soft);color:var(--ink);}
+  .subhead.first{margin-top:0;}
+  .subhead .eq{color:var(--ink-faint);font-weight:400;letter-spacing:.08em;text-transform:none;}
+
+  /* publication list */
+  ol.publist{list-style:none;margin:0;padding:0;}
+  .pub{display:grid;grid-template-columns:4.6rem minmax(0,1fr);gap:1rem;padding:1.05rem 0;border-bottom:1px dotted var(--line);}
+  .pub:last-child{border-bottom:0;}
+  .pub .py{color:var(--ink-faint);padding-top:.38rem;font-size:.64rem;line-height:1.5;}
+  .pub .pt{margin:0;color:var(--ink);font-size:1em;line-height:1.35;font-weight:500;}
+  .pub .pt a{border-bottom-color:rgba(0,0,0,.18);}
+  .pub .pa{margin:.2rem 0 0;color:var(--ink-soft);line-height:1.45;font-size:.86em;}
+  .pub .pa .me{color:var(--ink);}
+  .pub .pv{font-style:italic;}
+  .pub .plinks{margin-top:.5rem;display:flex;flex-wrap:wrap;gap:.25rem 1rem;font-size:.6rem;}
+  .pub .plinks a{color:var(--ink-soft);border-bottom:1px solid transparent;}
+  .pub .plinks a::before{content:"↗ ";color:var(--ink-faint);}
+  .pub .plinks a:hover{color:var(--accent);border-bottom-color:var(--accent-soft);}
+  .tag{display:inline-block;font-family:var(--mono);font-size:.54rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-soft);border:1px solid var(--line);padding:.22em .55em .16em;margin-right:.6rem;vertical-align:.14em;line-height:1.3;white-space:nowrap;}
+  .pub .award{margin:.6rem 0 0;font-family:var(--mono);font-size:.56rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;line-height:1.8;color:var(--ink-soft);}
+  .pub .award .tag{margin-right:.7rem;vertical-align:0;color:var(--ink);}
+  /* research keywords */
+  .keywords{list-style:none;margin:2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem 0;color:var(--ink-soft);}
+  .keywords li:not(:last-child)::after{content:"·";margin:0 .8rem;color:var(--ink-faint);}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.75fr) minmax(0,.9fr);gap:1.8rem 2rem;}
+  .contact .label{display:block;color:var(--ink-faint);margin-bottom:.55rem;}
+  .contact p{margin:0;line-height:1.5;}
+  address{font-style:normal;}
+  .city{font-size:.8em;color:var(--ink-faint);}
+  .paren{font-size:.8em;}
+  /* contact links: underline only on hover */
+  .contact a{border-bottom-color:transparent;}
+  .contact a:hover{border-bottom:1px solid var(--accent-soft);}
+
+  /* ↗ = the link leaves the page. Shown on hover only (publication links keep theirs),
+     and set outside the link box so it never extends the underline. */
+  nav.links a, .actions a, .contact a{position:relative;}
+  .arr{position:absolute;left:100%;top:50%;transform:translateY(-50%);line-height:1;margin-left:.3em;font-family:var(--mono);font-weight:400;letter-spacing:0;
+    color:var(--accent);opacity:0;transition:opacity .15s;pointer-events:none;}
+  a:hover > .arr{opacity:1;}
+  .contact .arr{font-size:.62em;transform:translateY(-38%);}  /* centred on the capitals of the serif text */
+  .actions .arr{transform:translateY(-68%);}  /* link box has 3px of underline padding */
+
+  /* fleuron + footer */
+  #contact{padding-bottom:0;}
+  /* ❡ sits two thirds of the way down the space after Contact */
+  .fleuron{margin:0;padding:5.5rem 0 2.75rem;line-height:1;}
+  .fleuron a{font-size:1.9rem;color:#8a8a8a;transition:color .2s;}
+  .fleuron a:hover{color:var(--accent);}
+
+  /* subtle entrance */
+  @media (prefers-reduced-motion:no-preference){
+    .rise{opacity:0;transform:translateY(8px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards;}
+    .d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.25s}.d4{animation-delay:.35s}
+    @keyframes rise{to{opacity:1;transform:none;}}
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width:640px){
+    nav.links{gap:.7rem;font-size:.6rem;letter-spacing:.08em;}
+    /* on phones the docked name needs the room: links fade out */
+    nav.links > a{transition:opacity .25s,color .15s;}
+    header.site.docked nav.links > a{opacity:0;pointer-events:none;}
+    .brand{font-size:.66rem;}
+    .hero{grid-template-columns:1fr;align-items:start;}
+    figure.portrait{order:-1;width:150px;margin:7px;}
+    .pub{grid-template-columns:1fr;gap:.2rem;}
+    .pub .py{padding-top:0;}
+    .contact{grid-template-columns:1fr;}
+  }
+  @media print{
+    header.site,.fleuron,.lang{display:none;}
+    body{background:#fff;}
+  }
+
+  /* ===== Variant Unica: Unica One for labels and for the name (unicase) ===== */
+  :root{--mono:"Unica One","IBM Plex Mono",ui-monospace,sans-serif;}
+  .mono{font-size:.82rem;font-weight:400;letter-spacing:.12em;}
+  .brand{font-weight:400;font-size:.9rem;letter-spacing:.1em;text-transform:none;}
+  .tag{font-size:.66rem;font-weight:400;}
+  .pub .award{font-size:.68rem;font-weight:400;}
+  .pub .plinks{font-size:.72rem;}
+  .pub .py{font-size:.76rem;padding-top:.3rem;}
+  /* name: medium size, regular weight */
+  h1.name{font-family:"Unica One",sans-serif;font-weight:400;text-transform:none;
+    letter-spacing:.05em;font-size:clamp(2.3rem,6.6vw,3.3rem);}
+  /* a touch heavier than Unica's single weight: ink stroke painted under the letters */
+  h1.name a{-webkit-text-stroke:.45px currentColor;paint-order:stroke fill;}
+  .role{font-size:1.08em;}
+
+  @media (max-width:640px){ nav.links{font-size:.72rem;} .brand{font-size:.8rem;} }
+
+  /* ===== Variant Unica + Newsreader: lighter, more contemporary text face to sit with Unica One ===== */
+  :root{--serif:"Newsreader","Source Serif 4",Georgia,serif;}
+  body{font-weight:300;font-optical-sizing:auto;font-size:clamp(1.06rem,.4vw + .98rem,1.16rem);line-height:1.62;}
+  .role{font-weight:300;}
+  .prose .lead::first-letter{font-weight:300;}
+  .pub .pt{font-weight:400;}
+  .pub .pa .me,.contact p,address{font-weight:300;}
+  strong,b{font-weight:500;}
+
+  /* ===== soft, uniform hover transitions ===== */
+  a, a *, .lang button{transition-property:color,border-color,text-decoration-color,background-color,opacity;
+    transition-duration:.35s;transition-timing-function:ease;}
+  .brand{transition:color .35s ease;}   /* its opacity is driven by scrolling: no delay */
+  @media (prefers-reduced-motion:reduce){ a, a *, .lang button{transition-duration:0s;} }
+  /* no automatic hyphenation anywhere */
+  body,body *{-webkit-hyphens:manual;hyphens:manual;}
+</style>
 </head>
 
+<body id="top">
 
-<body>
+<header class="site">
+  <div class="wrap navbar">
+    <a class="brand" id="brand" href="#top" tabindex="-1">Flavien Ganter</a>
+    <nav class="links mono" aria-label="Main">
+      <a href="#about"><span class="en">About</span><span class="fr">À propos</span></a>
+      <a href="#research"><span class="en">Research</span><span class="fr">Recherche</span></a>
+      <a class="nav-contact" href="#contact">Contact</a>
+      <a class="en" href="cv_fganter_en.pdf">CV<span class="arr" aria-hidden="true">↗</span></a>
+      <a class="fr" href="cv_fganter_fr.pdf">CV<span class="arr" aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
 
-    <script src="language.js"></script>
+<!-- language switch: small tag fixed to the bottom-right corner -->
+<div class="lang mono" role="group" aria-label="Language / Langue">
+  <button type="button" data-l="en">EN</button>
+  <span aria-hidden="true">/</span>
+  <button type="button" data-l="fr">FR</button>
+</div>
 
+<main class="wrap">
 
-    <section class="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <h1 class="name" id="name"><a href="#top">Flavien Ganter</a></h1>
+      <p class="role rise d3">
+        <span class="en">Sociologist and Applied Statistician</span>
+        <span class="fr">Sociologue et statisticien appliqué</span>
+      </p>
+      <p class="affil rise d3">
+        <span class="en">Max Weber Postdoctoral Fellow<br>European University Institute</span>
+        <span class="fr">Chercheur postdoctoral &amp; Max Weber Fellow<br>Institut universitaire européen</span>
+      </p>
+      <div class="actions mono rise d4">
+        <a class="en" href="cv_fganter_en.pdf">Curriculum vitæ<span class="arr" aria-hidden="true">↗</span></a>
+        <a class="fr" href="cv_fganter_fr.pdf">Curriculum vitæ<span class="arr" aria-hidden="true">↗</span></a>
+        <a href="mailto:flavien.ganter@eui.eu">Email<span class="arr" aria-hidden="true">↗</span></a>
+        <a href="http://www.flavienganter.me/"><span class="en">Elsewhere</span><span class="fr">Ailleurs</span><span class="arr" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
 
-        <div class="language-flag en">
-            <a href="#" onclick="setLanguage('fr'); return false;"><img src="img/flag_french.png" alt="Français" class="flag fr-flag"></a>
+    <figure class="portrait rise d2">
+      <div class="frame"><img src="img/profile.jpg" alt="Portrait of Flavien Ganter" width="840" height="1050"></div>
+    </figure>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <h2 class="sec-label mono"><span class="en">About</span><span class="fr">À propos</span></h2>
+    <div class="prose">
+      <p class="lead en">I am a sociologist and an applied statistician, currently a <a href="https://www.eui.eu/people?id=flavien-ganter">Max Weber Postdoctoral Fellow at the European University Institute <span class="paren">(</span><span class="sc">eui</span><span class="paren">)</span></a> in Florence, funded by the <a href="https://kohlifoundation.eu">Kohli Foundation for Sociology</a>. I received my Ph.D. in Sociology from Columbia University in 2025, and I also graduated from the École normale supérieure at Paris-Saclay and the École nationale de la statistique et de l’administration économique <span class="paren">(</span><span class="sc">ensae</span><span class="paren">)</span>.</p>
+      <p class="lead fr">Je suis sociologue et statisticien, actuellement <a href="https://www.eui.eu/people?id=flavien-ganter">chercheur postdoctoral et Max Weber Fellow à l’Institut universitaire européen <span class="paren">(</span><span class="sc">eui</span><span class="paren">)</span></a> de Florence, grâce au soutien de la <a href="https://kohlifoundation.eu">Kohli Foundation for Sociology</a>. Docteur en sociologie de l’université Columbia (New York), je suis aussi un ancien élève du département de sciences sociales de l’École normale supérieure de Paris-Saclay et ingénieur économiste-statisticien de l’École nationale de la statistique et de l’administration économique <span class="paren">(</span><span class="sc">ensae</span><span class="paren">)</span>.</p>
+
+      <p class="en">Broadly, I am interested in ethnoracial and national boundaries in the United States and in Western Europe, which I have studied through projects investigating the criminal justice system, immigrants’ integration, Mexican immigration to the U.S., and perceptions of diversity, among other topics. My current research uses original experiments and census data to explore how social cleavages that cut across ethnoracial categories reshape ethnoracial boundaries in the United States.</p>
+      <p class="fr">Comme chercheur, je m’intéresse à la dynamique des frontières ethno-raciales et nationales aux États-Unis et en Europe de l’Ouest, que j’étudie dans des projets relatifs à la justice pénale, à l’intégration des immigrés, à l’immigration mexicaine aux États-Unis et aux perceptions de la diversité, entre autres. Mes recherches actuelles mobilisent des expériences originales et des données de recensement pour explorer comment les clivages sociaux qui traversent les catégories ethno-raciales reconfigurent les frontières ethno-raciales aux États-Unis.</p>
+
+      <p class="en">My research in applied quantitative methodology is broadly interested in statistical modelling, experimental design, and computational methods.</p>
+      <p class="fr">Mes travaux en méthodologie quantitative appliquée portent sur la modélisation statistique, le design expérimental et les méthodes computationnelles.</p>
+
+      <p class="en">My work has been published in <em>Political Analysis</em>, in the <em>Proceedings of the National Academy of Sciences</em>, in <em>International Migration Review</em>, and in <em>Socius</em>, among other journals.</p>
+      <p class="fr">Mes travaux ont notamment été publiés dans <em>Political Analysis</em>, les <em>Proceedings of the National Academy of Sciences</em>, l’<em>International Migration Review</em> et <em>Socius</em>.</p>
+    </div>
+    <ul class="keywords mono en" aria-label="Research interests">
+      <li>Race, ethnicity &amp; migration</li><li>Social stratification</li><li>Cultural sociology</li><li>Quantitative methodology</li>
+    </ul>
+    <ul class="keywords mono fr" aria-label="Thèmes de recherche">
+      <li>Race, ethnicité &amp; migrations</li><li>Stratification sociale</li><li>Sociologie de la culture</li><li>Méthodologie quantitative</li>
+    </ul>
+  </section>
+
+  <!-- RESEARCH -->
+  <section class="block" id="research">
+    <h2 class="sec-label mono"><span class="en">Research</span><span class="fr">Recherche</span></h2>
+    <h3 class="subhead mono first"><span><span class="en">Peer-reviewed articles</span><span class="fr">Articles à comité de lecture</span></span><span class="eq"><span class="en">* Equal co-authorship</span><span class="fr">* Contribution égale</span></span></h3>
+    <ol class="publist">
+      <li class="pub">
+        <span class="py mono"><span class="en">Forth.</span><span class="fr">À paraître</span></span>
+        <div>
+          <p class="pt"><q>Network Externalities, Community Structure and Inequality in Migration Diffusion: Evidence from Mexico–U.S. Migration in 1965–2018</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span> <span class="en">and</span><span class="fr">et</span> Filiz Garip. <span class="pv">American Behavioral Scientist</span>.</p>
         </div>
-    
-        <div class="language-flag fr">
-            <a href="#" onclick="setLanguage('en'); return false;"><img src="img/flag_us.png" alt="English" class="flag us-flag"></a>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">Forth.</span><span class="fr">À paraître</span></span>
+        <div>
+          <p class="pt"><q>Same Place, Same Consequences? Local Context and Educational Attainment among Children of Immigrants and Natives in France</q></p>
+          <p class="pa">Francisco Lara-García, <span class="me">Flavien Ganter</span>, <span class="en">and</span><span class="fr">et</span> Andreas Wimmer. <span class="pv">International Migration Review</span>.</p>
         </div>
-
-    </section>
-
-
-    <section class="header">
-
-        <div class="profile">
-            <a href="index.html"><img class="avatar" src="img/profile.png"></a>
+      </li>
+      <li class="pub">
+        <span class="py mono">2023</span>
+        <div>
+          <p class="pt"><q><a href="https://www.cambridge.org/core/journals/political-analysis/article/identification-of-preferences-in-forcedchoice-conjoint-experiments-reassessing-the-quantity-of-interest/E6C7719AD2EF30514C2EC4396FD0D928">Identification of Preferences in Forced-Choice Conjoint Experiments: Reassessing the Quantity of Interest</a></q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>. <span class="pv">Political Analysis</span> 31(1): 98–112.</p>
+          <div class="plinks mono">
+            <a href="https://osf.io/preprints/socarxiv/e638u/"><span class="en">Pre-print</span><span class="fr">Pré-publication</span></a>
+            <a href="https://osf.io/q54kn/">Appendix</a>
+            <a href="https://github.com/flavienganter/preferences-conjoint-experiments"><span class="en">Replication code</span><span class="fr">Code de réplication</span></a>
+            <a href="https://github.com/flavienganter/preferences-conjoint-experiments/tree/90ad9571b2fe1edc75ad5867f5a9e907c7183cef/Functions"><span class="en">conjacp R function</span><span class="fr">Fonction R conjacp</span></a>
+          </div>
+          <p class="award en"><span class="tag">Award</span>Clifford Clogg Award, Best Graduate Student Paper · ASA Methodology · 2022</p>
+          <p class="award fr"><span class="tag">Prix</span>Prix Clifford Clogg, meilleur article de doctorant·e · Section Méthodologie de l’ASA · 2022</p>
         </div>
-            
-        
-        <div class="content">
-
-                <div class="page-title"></div>
-                    <a href="index.html"><span class="name">Flavien Ganter</span></a>
-                </div>
-
-                <nav class="en">
-                    <ul>
-                        <li class="nav-about"><a href="index.html"><span>About</span></a></li>
-                        <li class="nav-research"><a href="research.html"><span>Research</span></a></li>
-                        <li class="nav-cv"><a href="cv_fganter_en.pdf"><span>CV</span></a></li>
-                        <li class="nav-contact"><a href="contact.html"><span>Contact</span></a></li>
-                    </ul>
-                </nav>
-
-                <nav class="fr">
-                    <ul>
-                        <li class="nav-about"><a href="index.html"><span>À propos</span></a></li>
-                        <li class="nav-research"><a href="research.html"><span>Recherche</span></a></li>
-                        <li class="nav-cv"><a href="cv_fganter_fr.pdf"><span>CV</span></a></li>
-                        <li class="nav-contact"><a href="contact.html"><span>Contact</span></a></li>
-                    </ul>
-                </nav>
-
+      </li>
+      <li class="pub">
+        <span class="py mono">2023</span>
+        <div>
+          <p class="pt"><q><a href="https://journals.sagepub.com/doi/10.1177/23780231231196507">Greater Diversity or Fewer Whites? Disentangling Heterogeneity and Non-White Share at Macro and Micro Levels</a></q></p>
+          <p class="pa">Maria Abascal, <span class="me">Flavien Ganter</span>, <span class="en">and</span><span class="fr">et</span> Delia Baldassarri. <span class="pv">Socius: Sociological Research for a Dynamic World</span> 9.</p>
+          <div class="plinks mono">
+            <a href="https://osf.io/preprints/socarxiv/ve4aw"><span class="en">Pre-print</span><span class="fr">Pré-publication</span></a>
+            <a href="https://osf.io/9nm2f/">Appendix</a>
+          </div>
         </div>
-
-    </section>
-
-
-
-    <section class="main">
-
-        <div class="content">
-
-            <p class="en">I am a sociologist and an applied statistician, currently a <a href="https://www.eui.eu/people?id=flavien-ganter" >Max Weber Postdoctoral Fellow at the European University Institute <span class="smallbr">(</span><span style="font-variant: small-caps;">eui</span><span class="smallbr">)</span></a> in Florence, funded by the <a href="https://kohlifoundation.eu">Kohli Foundation for Sociology</a>. I received my Ph.D. in Sociology from Columbia University in 2025, and I also graduated from the École normale supérieure at Paris-Saclay and the École nationale de la statistique et de l’administration économique <span class="smallbr">(</span><span style="font-variant: small-caps;">ensae</span><span class="smallbr">)</span>.</p>
-            <p class="fr">Je suis sociologue et statisticien actuellement <a href="https://www.eui.eu/people?id=flavien-ganter" >chercheur postdoctoral et Max Weber Fellow à l'Institut universitaire européen <span class="smallbr">(</span><span style="font-variant: small-caps;">eui</span><span class="smallbr">)</span></a> de Florence, grâce au soutien de la <a href="https://kohlifoundation.eu">Kohli Foundation for Sociology</a>. Docteur en sociologie de l'université Columbia (New York), je suis aussi un ancien élève du département de sciences sociales de l’École normale supérieure de Paris-Saclay et ingénieur économiste-statisticien de l’École nationale de la statistique et de l’administration économique <span class="smallbr">(</span><span style="font-variant: small-caps;">ensae</span><span class="smallbr">)</span>.</p>
-
-            <p class="en">Broadly, I am interested in ethnoracial and national boundaries in the United States and in Western Europe, which I have studied through projects investigating the criminal justice system, immigrants’ integration, Mexican immigration to the U.S., and perceptions of diversity, among other topics. My current research uses original experiments and census data to explore how social cleavages that cut across ethnoracial categories reshape ethnoracial boundaries in the United States.</p>
-            <p class="fr">Comme chercheur, je m’intéresse à la dynamique des frontières ethno-raciales et nationales aux États-Unis et en Europe de l’Ouest, que j’étudie dans des projets relatifs à la justice pénale, à l’incorporation des immigrés et descendants d’immigrés, à la migration mexicaine aux États-Unis, et aux perceptions de la diversité. Mes travaux de recherche actuels s’appuient sur des expériences aléatoires originales et des données de recensement pour comprendre comment l’intersection des multiples dimensions de l’espace social transforme et structure les frontières ethno-raciales aux États-Unis.</p>
-
-            <p class="en">My research in applied quantitative methodology is broadly interested in statistical modelling, experimental design, and computational methods.</p>
-            <p class="fr">Je mène aussi des recherches en méthodologie quantitative appliquée portant sur la modélisation statistique de données empiriques, la conception d'expérimentations aléatoires et les méthodes computationelles.</p>
-
-            <p class="en">My <a href="research.html">work</a> has been published in <em>Political Analysis</em>, in the <em>Proceedings of the National Academy of Sciences</em>, in <em>International Migration Review</em>, and in <em>Socius</em>, among other journals.</p>
-            <p class="fr">Mes <a href="research.html">recherches</a> ont été publiées dans <em>Political Analysis</em>, <em>Proceedings of the National Academy of Sciences</em>, <em>International Migration Review</em> et <em>Socius</em>, entre autres revues scientifiques.</p>
-
-            <p class="psymbol"><a href="#">&#10081;</a></p>
-
+      </li>
+      <li class="pub">
+        <span class="py mono">2022</span>
+        <div>
+          <p class="pt"><q><a href="https://journals.sagepub.com/doi/10.1177/15356841221108901">Know it when you see it? The qualities of the communities people describe as <q>diverse</q> (or not)</a></q></p>
+          <p class="pa">Maria Abascal* <span class="en">and</span><span class="fr">et</span> <span class="me">Flavien Ganter</span>*. <span class="pv">City &amp; Community</span> 21(4): 314–339.</p>
+          <div class="plinks mono">
+            <a href="https://osf.io/preprints/socarxiv/rvfjw/"><span class="en">Pre-print</span><span class="fr">Pré-publication</span></a>
+            <a href="https://osf.io/a6q5w/">Appendix</a>
+            <a href="https://sagesociology.libsyn.com/city-community-know-it-when-you-see-it-the-qualities-of-the-communities-people-describe-as-diverse-or-not"><span class="en">ASA Podcast</span><span class="fr">Podcast de l’ASA</span></a>
+          </div>
         </div>
+      </li>
+      <li class="pub">
+        <span class="py mono">2021</span>
+        <div>
+          <p class="pt"><q><a href="https://www.pnas.org/content/118/16/e2023429118">The cumulative risk of jail incarceration</a></q></p>
+          <p class="pa">Bruce Western, Jacklyn Davis*, <span class="me">Flavien Ganter</span>*, <span class="en">and</span><span class="fr">et</span> Natalie Smith*. <span class="pv">Proceedings of the National Academy of Sciences</span> 118(16).</p>
+        </div>
+      </li>
+    </ol>
 
-    </section>
+    <!-- WORK IN PROGRESS. Left column = status: Under review / R&R / In prep.
+         (FR: En évaluation / R&R / En préparation). For an R&R, end the author line with
+         "<span class="en">At</span><span class="fr">Pour</span> <span class="pv">Journal</span>." so it can't be read as accepted. -->
+    <h3 class="subhead mono"><span class="en">Work in progress</span><span class="fr">Travaux en cours</span></h3>
+    <ol class="publist">
+      <li class="pub">
+        <span class="py mono"><span class="en">Under review</span><span class="fr">En cours d’évaluation</span></span>
+        <div>
+          <p class="pt"><q>Perceived Social Distance, Symbolic Boundaries, and Everyday Classifications: The Imagined Topography of the Social Space in the United States</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Laying the Tracks: Selectivity of Pioneer Migrants and Diffusion of Mexico–U.S. Migration</q></p>
+          <p class="pa">Filiz Garip <span class="en">and</span><span class="fr">et</span> <span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Long-Term Residential Trajectories of Immigrants and Children of Immigrants in France, 1975–2022</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span> <span class="en">and</span><span class="fr">et</span> Sorana Toma.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Relational Clustering without Unit-Level Identification</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Uncovering Mechanism Heterogeneity in Diverse Populations: A Framework</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Cross-Cutting Social Cleavages, Perceived Intra-Group Heterogeneity, and Ethnoracial Boundaries in the United States</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono"><span class="en">In prep.</span><span class="fr">En prép.</span></span>
+        <div>
+          <p class="pt"><q>Immigration Replenishment, Residential Segregation, and the Reconfiguration of Ethnoracial Boundaries in the United States</q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>.</p>
+        </div>
+      </li>
+    </ol>
 
+    <h3 class="subhead mono"><span class="en">Popular science</span><span class="fr">Vulgarisation scientifique</span></h3>
+    <ol class="publist">
+      <li class="pub">
+        <span class="py mono">2017</span>
+        <div>
+          <p class="pt"><q><a href="https://shs.cairn.info/revue-regards-croises-sur-l-economie-2017-1-page-132">Les sciences sociales face aux phénomènes de radicalisation</a></q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>. <span class="pv">Regards croisés sur l’économie</span> 20(1): 132–135.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono">2016</span>
+        <div>
+          <p class="pt"><q><a href="https://shs.cairn.info/revue-regards-croises-sur-l-economie-2016-1-page-7">L’économie au secours du politique ? Éditorial</a></q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span> <span class="en">and</span><span class="fr">et</span> Sébastien Grobon. <span class="pv">Regards croisés sur l’économie</span> 18(1): 7–9.</p>
+        </div>
+      </li>
+      <li class="pub">
+        <span class="py mono">2016</span>
+        <div>
+          <p class="pt"><q><a href="https://shs.cairn.info/revue-regards-croises-sur-l-economie-2016-1-page-165">Comment les électeurs décident-ils ? Les approches sociologiques du vote</a></q></p>
+          <p class="pa"><span class="me">Flavien Ganter</span>. <span class="pv">Regards croisés sur l’économie</span> 18(1): 165–169.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
 
+  <!-- CONTACT -->
+  <section class="block" id="contact">
+    <h2 class="sec-label mono">Contact</h2>
+    <div class="contact">
+      <div>
+        <span class="label mono">Email</span>
+        <p><a href="mailto:flavien.ganter@eui.eu">flavien.ganter@eui.eu<span class="arr" aria-hidden="true">↗</span></a></p>
+      </div>
+      <div>
+        <span class="label mono"><span class="en">Mail</span><span class="fr">Courrier</span></span>
+        <address>European University Institute<br>Badia Fiesolana<br>Via dei Roccettini 9<br>50014 San Domenico di Fiesole (FI)<br>Italia</address>
+      </div>
+      <div>
+        <span class="label mono"><span class="en">Elsewhere</span><span class="fr">Ailleurs</span></span>
+        <p><a href="https://github.com/flavienganter">GitHub<span class="arr" aria-hidden="true">↗</span></a><br>
+           <a href="http://www.flavienganter.me/"><span class="en">Social networks</span><span class="fr">Réseaux sociaux</span><span class="arr" aria-hidden="true">↗</span></a><br>
+           <a class="en" href="cv_fganter_en.pdf">Curriculum vitæ<span class="arr" aria-hidden="true">↗</span></a><a class="fr" href="cv_fganter_fr.pdf">Curriculum vitæ<span class="arr" aria-hidden="true">↗</span></a></p>
+      </div>
+    </div>
+    <p class="fleuron"><a href="#top" title="Back to top" aria-label="Back to top">❡</a></p>
+  </section>
 
+</main>
+
+<script>
+  document.querySelectorAll('.lang [data-l]').forEach(function(b){
+    b.addEventListener('click', function(){ setLanguage(b.getAttribute('data-l')); });
+  });
+  function setLanguage(l){
+    document.documentElement.lang = l;
+    try { localStorage.setItem('lang', l); } catch(e){}
+    window.dispatchEvent(new Event('resize'));   /* link widths changed: re-measure the bar */
+  }
+
+  /* The big name scrolls with the page while shrinking, then docks in the
+     top bar (left edge of the text column) and stays there. */
+  (function(){
+    var name = document.getElementById('name'),
+        bar  = document.querySelector('header.site'),
+        brand = document.getElementById('brand'),
+        dist, scaleEnd;
+
+    /* zero-size markers sitting on the text baseline, used to align baselines exactly */
+    function marker(parent){
+      var m = document.createElement('span');
+      m.setAttribute('aria-hidden','true');
+      m.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline;';
+      parent.appendChild(m); return m;
+    }
+    var nameMark = marker(name.querySelector('a')),
+        navMark  = marker(document.querySelector('nav.links a'));
+
+    function measure(){
+      name.style.transform = 'none';
+      var r = name.getBoundingClientRect(),
+          sy = window.scrollY,
+          C = r.top + sy + r.height/2,                       /* transform origin (vertical centre), page coords */
+          B = nameMark.getBoundingClientRect().top + sy,     /* name baseline, page coords */
+          NB = navMark.getBoundingClientRect().top;          /* nav baseline, viewport coords (bar is sticky at top) */
+      /* shrink the serif name to the width of the monospace name in the bar, then cross-fade */
+      scaleEnd = Math.min(1, brand.getBoundingClientRect().width / r.width);
+      /* scroll position at which the scaled name's baseline meets the nav baseline */
+      dist = Math.max(1, C + scaleEnd * (B - C) - NB);
+      update();
+    }
+    function update(){
+      var y = window.scrollY,
+          p = Math.min(1, Math.max(0, y / dist)),
+          s = 1 + (scaleEnd - 1) * p,
+          pin = Math.max(0, y - dist);                     /* keep it in the bar once docked */
+      var FADE = 40,                                      /* once docked, cross-fade serif → mono over the next 40px */
+          q = Math.min(1, Math.max(0, (y - dist) / FADE));
+      name.style.transform = 'translate3d(0,' + pin + 'px,0) scale(' + s + ')';
+      name.style.opacity = 1 - q;
+      name.style.visibility = q >= 1 ? 'hidden' : '';
+      brand.style.opacity = q;
+      bar.classList.toggle('docked', q >= 1);
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function(){
+      if (!ticking){ ticking = true; requestAnimationFrame(function(){ update(); ticking = false; }); }
+    }, {passive:true});
+    window.addEventListener('resize', measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    window.addEventListener('load', measure);
+    measure();
+  })();
+</script>
 </body>
 </html>
